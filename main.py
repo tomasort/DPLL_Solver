@@ -9,22 +9,16 @@ neg = "~"
 con = "&"
 dis = "|"
 
-precedence = {
-    bic: 1,
-    imp: 2,
-    dis: 3,
-    con: 4,
-    neg: 5
-}
+precedence = {bic: 1, imp: 2, dis: 3, con: 4, neg: 5}
 
 # We are going to need a clause class
 symbol = re.compile(r"[a-zA-Z]")
 operator = re.compile(r"=>|\||&|~|<=>")
 left_brackets = re.compile(r"\(|\[")
 right_brackets = re.compile(r"\)|\]")
-test = "(P & ~ Q => W <=> A | B & C) & (A => B) & (C | B & A)"
-test = "(A <=> B <=> C) & (A | ~B)"
-test = "(B => E) & (E => ~G) & (~(~B & ~C) <=> A) & (~(~E | ~G) => A) & (A & B => G) & (F => B & D)"
+# test = "(P & ~ Q => W <=> A | B & C) & (A => B) & (C | B & A)"
+# test = "(A <=> B <=> C) & (A | ~B)"
+# test = "(B => E) & (E => ~G) & (~(~B & ~C) <=> A) & (~(~E | ~G) => A) & (A & B => G) & (F => B & D)"
 # test = "(P | Q | ~R) & (P | ~Q | R) & (~P | Q) & (~Q | R | W) & (~R | W) & (~W | ~X) & (~W | X)"
 
 
@@ -423,6 +417,7 @@ def dpll_solver(clauses, symbol_dict=None):
 
 if __name__ == '__main__':
     root = make_parse_tree(infix_to_prefix(test))
+
     # inorder_traversal(root)
     root = bnf_to_cnf(root)
     clauses = get_clauses(root)
