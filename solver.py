@@ -220,7 +220,7 @@ def tokenize(tokens):
     return _tokens
 
 
-def is_balanced(exp):
+def validate_parentheses(exp):
     match = {'(': ')', '[': ']', '{': '}'}
     s = []
     for c in exp:
@@ -249,7 +249,7 @@ def validate_expression(exp):
 def infix_to_prefix(tokens):
     prefix_expression = []
     operator_stack = []
-    if not is_balanced(tokens):
+    if not validate_parentheses(tokens):
         print("ERROR: Parentheses are not balanced")
         sys.exit(1)
     if not validate_expression("".join(tokens)):
@@ -292,7 +292,8 @@ def remove_biconditionals(current_sub_tree, parent):
         remove_biconditionals(current_node.children[1], current_node)
         c1 = current_node.children[0]
         c2 = current_node.children[1]
-        parent.children[parent.children.index(current_node)] = Conjunction(Implication(c1, c2), Implication(c2, c1))
+        child_index = parent.children.index(current_node)
+        parent.children[child_index] = Conjunction(Implication(c1, c2), Implication(c2, c1))
     else:
         current_sub_tree.apply_to_children(remove_biconditionals, current_sub_tree)
 
@@ -372,28 +373,28 @@ def distribute_disjunctions(current_sub_tree, parent):
 def bnf_to_cnf(bnf):
     root = TreeNode([bnf])
     print_verbose("Full Sentence Before CNF transformation")
-    inorder_traversal(bnf)
+    inorder_traversal(root.children[0])
     print_verbose()
     # Step 1 remove biconditionals
     remove_biconditionals(root.children[0], root)
     print_verbose("After Removing Biconditionals:")
-    inorder_traversal(bnf)
+    inorder_traversal(root.children[0])
     print_verbose()
     # Step 2 remove implications
     remove_implication(root.children[0], root)
     print_verbose("After removing Implications:")
-    inorder_traversal(bnf)
+    inorder_traversal(root.children[0])
     print_verbose()
     # Step 3 move negations in
     move_negations(root.children[0], root)
     print_verbose("After Moving Negations inwards:")
-    inorder_traversal(bnf)
+    inorder_traversal(root.children[0])
     print_verbose()
     # Step 4 distribute disjunctions
     while not is_cnf(root.children[0]):
         distribute_disjunctions(root.children[0], root)
     print_verbose("After Distributing the Disjunctions until we have a CNF expression:")
-    inorder_traversal(bnf)
+    inorder_traversal(root.children[0])
     print_verbose()
     return root.children[0]
 
