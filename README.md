@@ -1,8 +1,10 @@
 # DPLL Solver
 
-The Davis–Putnam–Logemann–Loveland (DPLL) algorithm is a complete, backtracking-based search algorithm for deciding the satisfiability of a propositional logic formula in conjunctive normal form (CNF)
+The Davis–Putnam–Logemann–Loveland (DPLL) algorithm is a complete, backtracking-based search algorithm for deciding the satisfiability of a propositional logic formula in conjunctive normal form (CNF). 
 
-# BNF to CNF Converter
+The SAT problem is important both from theoretical and practical points of view. In complexity theory it was the first problem proved to be NP-complete, and can appear in a broad variety of applications such as model checking, automated planning and scheduling, and diagnosis in artificial intelligence.
+
+## BNF to CNF Converter
 
 In order to solve formulas that are not in CNF, I also implemented a BNF to CNF converter.
 
