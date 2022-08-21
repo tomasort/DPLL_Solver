@@ -8,7 +8,18 @@ The SAT problem is important both from theoretical and practical points of view.
 
 In order to solve formulas that are not in CNF, I also implemented a BNF to CNF converter.
 
+# Inputs
+
+solver [-v] -mode $mode $input-file
+
+* `-v` is an optional ﬂag for verbose mode (more later)
+
+* `-mode` is followed by one of: `cnf`, `dpll`, `solver`
+  - In mode `cnf` you should expect a BNF input ﬁle, convert to CNF and print to console 
+  - In mode `dpll` you should expect a CNF input ﬁle, which you solve using the DPLL algorithm printing the solution to console 
+  - In mode `solver` you should expect a BNF input ﬁle, run cnf mode, but instead of printing, send the input to dpll mode
 # How To Run
+
 You can run the solver program using:
 
 ```
