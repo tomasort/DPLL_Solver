@@ -1,22 +1,31 @@
-#Lab 2
+# DPLL Solver
 
-Author: Tomás Ortega Rojas
+The Davis–Putnam–Logemann–Loveland (DPLL) algorithm is a complete, backtracking-based search algorithm for deciding the satisfiability of a propositional logic formula in conjunctive normal form (CNF)
 
-NYUID: tor213
+# BNF to CNF Converter
 
-#How To Run
+In order to solve formulas that are not in CNF, I also implemented a BNF to CNF converter.
+
+# How To Run
 You can run the solver program using:
 
-```python3 solver.py [-h] -mode MODE [-v] [-d] filename```
+```
+python3 solver.py [-h] -mode MODE [-v] [-d] filename
+```
 
 Example:
 
 If we want to find a solution for a CNF sentence in a file called 
 input_file.txt we would run
 
-```python3 solver.py -v -mode cnf input_file.txt```
+```
+python3 solver.py -v -mode cnf input_file.txt
+```
 
-For more information on how to use it, run `python3 solver.py -h`. 
+For more information on how to use it, run: 
+``` 
+python3 solver.py -h
+```
 
 If the mode is set to dpll, the output will be the set of truth 
 values that satisfy the given set of CNF clauses if there exists one. If not, 
@@ -29,7 +38,7 @@ CNF and print them out to the user.
 If the mode is set to solver, the program will return the set of CNF clauses and 
 the set of truth values that satisfy the set of clauses. 
 
-#Implementation Details
+# Implementation Details
 The supported operators in this implementation are: `<=>, =>, !, &, and |` 
 for biconditional, implication, negation, conjunction and disjunction respectively.
 
@@ -57,6 +66,3 @@ literal. If we are unable to find an easy case, we look for a hard case. Then we
 function recursively on the rest of the clauses and on a copy of the truth values for the
 symbols. The function `remove_and_simplify` takes care of removing any clause that has been 
 satisfied, and simplifying any clause that needs simplifying. 
-
-# Extra Credit
-This program is able to parse expressions containing () and _
